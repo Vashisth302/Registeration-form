@@ -1,44 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Validation</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Validation Assignment</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
-  <div class="form-container">
+  <div class="form-container" aria-live="polite">
     <h2>Register</h2>
-    
+
     <!-- Message Box -->
-    <div id="message"></div>
-    
-    <form id="myForm">
+    <div id="message" class="hidden" role="status"></div>
+
+    <form id="registrationForm" novalidate>
       <label for="email">Email</label>
-      <input type="text" id="email" name="email" placeholder="Enter your email">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="user@example.com"
+        autocomplete="email"
+        required
+      />
 
       <label for="phoneno">Phone Number</label>
-      <input 
-        type="text" 
-        id="phoneno" 
-        name="phoneno" 
-        placeholder="Enter your phone number"
+      <input
+        type="text"
+        id="phoneno"
+        name="phoneno"
+        placeholder="10 digit phone number"
         maxlength="10"
-        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
-        <!-- Only digits allowed, max 10 -->
+        inputmode="numeric"
+        autocomplete="tel"
+        required
+      />
 
       <label for="password">Password</label>
       <div class="password-box">
-        <input type="password" id="password" name="password" placeholder="Enter password">
-        <button type="button" onclick="togglePassword('password')">👁</button>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="At least 8 chars, 1 upper, 1 lower, 1 number"
+          autocomplete="new-password"
+          required
+        />
+        <button type="button" class="toggle-pass" data-target="#password" aria-label="Show password">👁</button>
       </div>
 
       <label for="confirmpassword">Confirm Password</label>
       <div class="password-box">
-        <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm password">
-        <button type="button" onclick="togglePassword('confirmpassword')">👁</button>
+        <input
+          type="password"
+          id="confirmpassword"
+          name="confirmpassword"
+          placeholder="Re-enter password"
+          autocomplete="new-password"
+          required
+        />
+        <button type="button" class="toggle-pass" data-target="#confirmpassword" aria-label="Show confirm password">👁</button>
       </div>
 
       <button type="submit" id="submitbutton">Submit</button>
@@ -46,12 +73,5 @@
   </div>
 
   <script src="script.js"></script>
-  <script>
-    // Password toggle
-    function togglePassword(id) {
-      const field = document.getElementById(id);
-      field.type = field.type === "password" ? "text" : "password";
-    }
-  </script>
 </body>
 </html>
